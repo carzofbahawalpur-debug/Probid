@@ -1,0 +1,104 @@
+[
+    {
+        "id": 1,
+        "title": "Procurement Auction System",
+        "desc": "B2B platform for companies to auction surplus inventory or procurement needs. Features include reverse auctions, bulk bidding, and logistics integration.",
+        "budget": 12300.0,
+        "min_bid": 12000.0,
+        "created": "2025-12-23 13:12:55.717069",
+        "deadline": "2026-04-25 13:12:55.717095",
+        "status": "CLOSED",
+        "assigned_to": "DrJawad",
+        "winning_bid": 3213.0
+    },
+    {
+        "id": 2,
+        "title": "Art & Collectibles Auction Platform",
+        "desc": "Online auction house for art, antiques, and collectibles with authentication services, provenance tracking, and secure shipping coordination.",
+        "budget": 100000.0,
+        "min_bid": 195000.0,
+        "created": "2025-12-29 22:13:14.680169",
+        "deadline": "2025-12-31 22:13:14.680195",
+        "status": "OPEN",
+        "assigned_to": null
+    },
+    {
+        "id": 3,
+        "title": " Freelance Job Bidding Marketplace",
+        "desc": "Similar to Upwork but niche-focused (e.g., creative services). Includes profile management, portfolio display, milestone payments, and dispute resolution.",
+        "budget": 500000.0,
+        "min_bid": 450000.0,
+        "created": "2025-12-29 22:14:01.474441",
+        "deadline": "2026-01-26 22:14:01.474458",
+        "status": "CLOSED",
+        "assigned_to": "DoctorJ",
+        "winning_bid": 20.0
+    },
+    {
+        "id": 4,
+        "title": "Construction Project Bidding Platform.",
+        "desc": "Connects contractors with project owners. Features include project posting, contractor verification, bid submission, and project management tools.",
+        "budget": 99000.0,
+        "min_bid": 90200.0,
+        "created": "2025-12-30 13:37:53.931680",
+        "deadline": "2026-01-29 13:37:53.932193",
+        "status": "OPEN",
+        "assigned_to": null
+    },
+    {
+        "id": 5,
+        "title": "Government Tender Management System",
+        "desc": "A comprehensive system for government agencies to publish tenders and contractors to submit bids. Includes document management, evaluation tools, and compliance tracking.",
+        "budget": 17000.0,
+        "min_bid": 12000.0,
+        "created": "2025-12-30 13:40:13.460238",
+        "deadline": "2026-01-29 13:40:13.460270",
+        "status": "OPEN",
+        "assigned_to": null
+    },
+    {
+        "id": 6,
+        "title": "Real Estate Bidding Platform",
+        "desc": " A web platform where potential buyers can bid on properties in real-time auctions. Features include property listings, virtual tours, automated bidding, and secure payment processing.",
+        "budget": 15000.0,
+        "min_bid": 10000.0,
+        "created": "2026-01-05 14:41:50.585193",
+        "deadline": "2026-02-04 14:41:50.585240",
+        "status": "OPEN",
+        "assigned_to": null
+    },
+    {
+        "id": 7,
+        "title": "Need some chairs",
+        "desc": "We need 100 chairs for students of high quality.",
+        "budget": 1500.3,
+        "min_bid": 15000.0,
+        "created": "2026-01-22 11:08:53.993344",
+        "deadline": "2026-02-14 11:08:53.993368",
+        "status": "OPEN",
+        "assigned_to": null
+    },
+    {
+        "id": 8,
+        "title": "Need of Some plants in the Garden",
+        "desc": "Our institute is designing a garden in front of their building for which they need some plants. they can be any flowering plants and may beautify the scenery of the building.",
+        "budget": 2000.0,
+        "min_bid": 1800.0,
+        "created": "2026-01-22 11:20:58.161202",
+        "deadline": "2026-02-21 11:20:58.161264",
+        "status": "OPEN",
+        "assigned_to": null
+    },
+    {
+        "id": 9,
+        "title": "cars",
+        "desc": "buy sell",
+        "budget": 50000.0,
+        "min_bid": 10000.0,
+        "created": "2026-01-22 13:35:06.112563",
+        "deadline": "2026-02-21 13:35:06.112602",
+        "status": "CLOSED",
+        "assigned_to": "DrJawad",
+        "winning_bid": 12000.0
+    }
+]

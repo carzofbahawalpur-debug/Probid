@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ProBid | My Bids</title>
+<!-- Bootstrap and CSS (keep your existing styles) -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0f172a;--card:#111827;--silver:#e5e7eb;--muted:#9ca3af;--blue:#38bdf8;--purple:#a78bfa;--green:#34d399;--orange:#fb923c;}
+*{font-family:'Poppins',sans-serif;} body{background:var(--bg);color:var(--silver);}
+.navbar{background:#020617;}.navbar-brand{font-weight:700;color:#fff!important;}.nav-link{color:var(--muted)!important;}.nav-link:hover{color:#fff!important;}
+.login-btn{border:1px solid var(--blue);padding:6px 18px;border-radius:30px;color:#fff;text-decoration:none;}.login-btn:hover{background:var(--blue);color:#000;}
+.hero{padding:80px 20px;text-align:center;}
+.hero h1{font-size:2.5rem;font-weight:700;color:#fff;}
+.section{padding:60px 20px;}
+.section-title{text-align:center;margin-bottom:40px;}
+.section-title h2{color:#fff;font-weight:700;}
+.card{background:var(--card);border:none;border-radius:18px;padding:30px;box-shadow:0 20px 45px rgba(0,0,0,.45);transition:.3s;}
+.card:hover{transform:translateY(-5px);}
+.card h5{color:#fff;font-weight:600;}
+.card p{color:var(--muted);}
+.border-blue{border-top:5px solid var(--blue);}
+.border-purple{border-top:5px solid var(--purple);}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg">
+<div class="container">
+<a class="navbar-brand" href="#">ProBid</a>
+<div class="collapse navbar-collapse show">
+<ul class="navbar-nav ms-auto align-items-center">
+<li class="nav-item"><a class="nav-link" href="Dashboard.html">Dashboard</a></li>
+<li class="nav-item"><a class="nav-link active" href="vendors.html">Place Bids</a></li>
+<li class="nav-item"><a class="nav-link" id="logout-link">Logout</a></li>
+</ul>
+</div>
+</div>
+</nav>
+
+<!-- DASHBOARD CONTENT -->
+<section class="hero">
+<h1>My Bids</h1>
+<p>Here are all the bids you have submitted.</p>
+</section>
+
+<!-- BIDS WILL BE LOADED HERE -->
+<section class="section">
+<div class="container">
+    <div id="bids-container" class="row g-4">
+        <!-- This message will show while loading -->
+        <p class="text-center w-100">Loading your bids...</p>
+    </div>
+</div>
+</section>
+
+<!-- BOOTSTRAP JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- THE BRAIN OF THE PAGE -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const user = JSON.parse(sessionStorage.getItem('user'));
+
+        if (!user) {
+            // Not logged in, redirect to login page
+            window.location.href = 'login.html';
+            return;
+        }
+
+        const bidsContainer = document.getElementById('bids-container');
+
+        // Fetch bids for the logged-in user
+        fetch(`http://localhost:5000/api/my-bids/${user.username}`)
+            .then(response => response.json())
+            .then(bids => {
+                // 1. Clear "Loading..." message
+                bidsContainer.innerHTML = '';
+
+                // 2. Check for error message from API
+                if (bids.error) {
+                    bidsContainer.innerHTML = `<p class="text-danger text-center w-100">Error: ${bids.error}</p>`;
+                    return;
+                }
+
+                // 3. Check if list is empty
+                if (bids.length === 0) {
+                    bidsContainer.innerHTML = `<p class="text-center w-100">You haven't placed any bids yet.</p>`;
+                    return;
+                }
+
+                // 4. Create a card for each bid
+                bids.forEach(bid => {
+                    // Determine status text and color
+                    const status = bid.project_status || 'OPEN';
+                    const statusColor = status === 'CLOSED' ? 'green' : 'orange';
+                    const statusText = status === 'CLOSED' ? 'DEAL CLOSED / AWARDED' : 'OPEN';
+
+                    const projectCard = `
+                        <div class="col-md-6">
+                            <div class="card border-blue">
+                                <h5>Bid for Project ID: ${bid.project_id}</h5>
+                                <p>Your Bid Amount: <strong>${bid.amount} PKR</strong></p>
+                                <p>Delivery Time: <strong>${bid.delivery_days} days</strong></p>
+                                <p>Status: <strong style="color: var(--${statusColor})">${statusText}</strong></p>
+                                <p>Placed on: ${new Date(bid.bid_time).toLocaleString()}</p>
+                            </div>
+                        </div>
+                    `;
+                    bidsContainer.innerHTML += projectCard;
+                });
+
+            }) // <--- THIS WAS THE MISSING CLOSING BRACE
+            
+            .catch(error => {
+                console.error('Error fetching bids:', error);
+                bidsContainer.innerHTML = '<p class="text-danger text-center w-100">Could not load bids. Is the Python API running?</p>';
+            });
+
+        // Logout functionality
+        document.getElementById('logout-link').addEventListener('click', function() {
+            sessionStorage.removeItem('user');
+            window.location.href = 'login.html';
+        });
+    });
+</script>
+
+</body>
+</html>

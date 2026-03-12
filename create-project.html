@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ProBid | Create New Project</title>
+<!-- Bootstrap and CSS (keep your existing styles) -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0f172a;--card:#111827;--silver:#e5e7eb;--muted:#9ca3af;--blue:#38bdf8;--purple:#a78bfa;--green:#34d399;--orange:#fb923c;}
+*{font-family:'Poppins',sans-serif;} body{background:var(--bg);color:var(--silver);}
+.navbar{background:#020617;}.navbar-brand{font-weight:700;color:#fff!important;}.nav-link{color:var(--muted)!important;}.nav-link:hover{color:#fff!important;}
+.hero{padding:80px 20px;text-align:center;}
+.hero h1{font-size:2.5rem;font-weight:700;color:#fff;}
+.section{padding:60px 20px;}
+.form-control{background:#020617;border:1px solid #1f2937;color:#fff;padding:12px;border-radius:12px;}
+.form-control:focus{background:#020617;border-color:var(--purple);box-shadow:none;color:#fff;}
+.btn-create{background:linear-gradient(135deg,var(--purple),var(--blue));border:none;padding:12px;border-radius:30px;font-weight:600;color:#000;width:100%;}
+.btn-create:hover{opacity:.9;}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg">
+<div class="container">
+<a class="navbar-brand" href="#">ProBid</a>
+<div class="collapse navbar-collapse show">
+<ul class="navbar-nav ms-auto align-items-center">
+<li class="nav-item"><a class="nav-link" href="Dashboard.html">Dashboard</a></li>
+<li class="nav-item"><a class="nav-link" href="proposal.html">Proposals</a></li>
+<li class="nav-item"><a class="nav-link" id="logout-link">Logout</a></li>
+</ul>
+</div>
+</div>
+</nav>
+
+<!-- CREATE PROJECT FORM -->
+<section class="section">
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="text-center mb-4" style="color: #fff;">Create New Project</h2>
+                    <form id="createProjectForm">
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Project Title</label>
+                            <input type="text" class="form-control" id="title" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea class="form-control" id="description" rows="4" required></textarea>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="budget" class="form-label">Budget (PKR)</label>
+                                <input type="number" class="form-control" id="budget" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="minBid" class="form-label">Minimum Bid (PKR)</label>
+                                <input type="number" class="form-control" id="minBid" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-create">Create Project</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+<!-- THE BRAIN OF THE PAGE -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const user = JSON.parse(sessionStorage.getItem('user'));
+        if (!user || user.role !== 'admins') {
+            alert('You do not have permission to view this page.');
+            window.location.href = 'login.html';
+            return;
+        }
+
+        document.getElementById('createProjectForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const title = document.getElementById('title').value;
+            const description = document.getElementById('description').value;
+            const budget = document.getElementById('budget').value;
+            const minBid = document.getElementById('minBid').value;
+
+            const response = await fetch('http://localhost:5000/api/projects', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    title: title,
+                    description: description,
+                    budget: parseFloat(budget),
+                    minBid: parseFloat(minBid)
+                })
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                alert('Project created successfully!');
+                window.location.href = 'proposal.html'; // Redirect to see the new project
+            } else {
+                alert('Error: ' + result.message);
+            }
+        });
+
+        // Logout functionality
+        document.getElementById('logout-link').addEventListener('click', function() {
+            sessionStorage.removeItem('user');
+            window.location.href = 'login.html';
+        });
+    });
+</script>
+
+</body>
+</html>

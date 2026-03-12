@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ProBid | My Profile</title>
+<!-- Bootstrap and CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0f172a;--card:#111827;--silver:#e5e7eb;--muted:#9ca3af;--blue:#38bdf8;--purple:#a78bfa;--green:#34d399;}
+*{font-family:'Poppins',sans-serif;} body{background:var(--bg);color:var(--silver);}
+.navbar{background:#020617;}.navbar-brand{font-weight:700;color:#fff!important;}.nav-link{color:var(--muted)!important;}.nav-link:hover{color:#fff!important;}
+.hero{padding:80px 20px;text-align:center;}
+.hero h1{font-size:2.5rem;font-weight:700;color:#fff;}
+.section{padding:60px 20px;}
+.card{background:var(--card);border:none;border-radius:18px;padding:30px;box-shadow:0 20px 45px rgba(0,0,0,.45);transition:.3s;}
+.card:hover{transform:translateY(-5px);}
+.card h5{color:#fff;font-weight:600;}
+.card p{color:var(--muted;}
+.border-purple{border-top:5px solid var(--purple);}
+</style>
+</head>
+<body>
+<!-- NAVBAR (same as other pages) -->
+<nav class="navbar navbar-expand-lg">
+<div class="container"><a class="navbar-brand" href="#">ProBid</a><div class="collapse navbar-collapse show"><ul class="navbar-nav ms-auto align-items-center"><li class="nav-item"><a class="nav-link" href="Dashboard.html">Dashboard</a></li><li class="nav-item"><a class="nav-link active" href="proposal.html">Proposals</a></li><li class="nav-item"><a class="nav-link" id="logout-link">Logout</a></li></ul></div></div>
+</nav>
+
+<!-- PROFILE CONTENT -->
+<section class="section">
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card border-purple">
+                <div class="card-body text-center">
+                    <h2 class="mb-4" id="profile-username">Loading...</h2>
+                    <p><strong>Role:</strong> <span id="profile-role"></span></p>
+                    <p><strong>Email:</strong> <span id="profile-email"></span></p>
+                    <p><strong>Rating:</strong> <span id="profile-rating"></span> / 5.0</p>
+                    <p><strong>Score:</strong> <span id="profile-score"></span></p>
+                    <hr style="border-color: var(--muted);">
+                    <p><strong>Bio:</strong> <span id="profile-bio">This is where you can write a short bio about yourself and your skills.</span></p>
+                    <button class="btn btn-primary mt-3" onclick="alert('Edit Profile feature coming next!')">Edit Profile</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+<!-- SCRIPT -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const user = JSON.parse(sessionStorage.getItem('user'));
+    if (!user) { window.location.href = 'login.html'; return; }
+
+    // Fetch detailed profile data from the API
+    fetch(`http://localhost:5000/api/user/${user.username}`)
+        .then(response => response.json())
+        .then(profile => {
+            if (profile.error) {
+                alert('Error loading profile: ' + profile.error);
+                return;
+            }
+            document.getElementById('profile-username').innerText = profile.username;
+            document.getElementById('profile-role').innerText = profile.role.charAt(0).toUpperCase() + profile.role.slice(1);
+            document.getElementById('profile-email').innerText = profile.email;
+            document.getElementById('profile-rating').innerText = profile.rating || 0;
+            document.getElementById('profile-score').innerText = profile.score || 0;
+        });
+    
+    // Logout
+    document.getElementById('logout-link').addEventListener('click', function() {
+        sessionStorage.removeItem('user');
+        window.location.href = 'login.html';
+    });
+});
+</script>
+</body>
+</html>

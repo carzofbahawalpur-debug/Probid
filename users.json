@@ -1,0 +1,256 @@
+{
+    "admins": {
+        "hmw": {
+            "password": "12345678",
+            "email": "",
+            "rating": 0,
+            "score": 0
+        },
+        "admin": {
+            "password": "python -u \"c:\\Users\\jawad\\Desktop\\5xii22_5o32pm.py\"",
+            "email": "",
+            "rating": 0,
+            "score": 0
+        },
+        "mub": {
+            "password": "123",
+            "email": "",
+            "rating": 0,
+            "score": 0
+        },
+        "admi": {
+            "password": "123",
+            "email": "",
+            "rating": 0,
+            "score": 0
+        },
+        "123": {
+            "password": "123",
+            "email": "",
+            "rating": 0,
+            "score": 0
+        },
+        "jawad": {
+            "password": "Aa1@'tre",
+            "email": "jawad@gmail.com",
+            "rating": 0,
+            "score": 0
+        },
+        "ui": {
+            "password": "Gi1@gill",
+            "email": "jawad@gmial.com",
+            "rating": 0,
+            "score": 0
+        },
+        "Dr.J": {
+            "password": "Dr.JAWA1",
+            "email": "JAWAD@GMAIL.COM",
+            "rating": 0,
+            "score": 0,
+            "created_at": "2025-12-23 11:04:39.226565"
+        },
+        "Samsung": {
+            "password": "DOCtor1!",
+            "email": "samsung@android.com",
+            "rating": 0,
+            "score": 0,
+            "created_at": "2025-12-30 17:55:20.107857"
+        },
+        "mubashargill111": {
+            "password": "GILLmubashar123@",
+            "email": "mubashargill113@gmail.com",
+            "rating": 0,
+            "score": 0,
+            "created_at": "2026-01-05 22:25:02.346990"
+        },
+        "mubashargill113": {
+            "password": "GILLmubashar123@",
+            "email": "mubashargill113@gmail.com",
+            "rating": 0,
+            "score": 0,
+            "created_at": "2026-01-22 13:32:38.371290"
+        }
+    },
+    "vendors": {
+        "m": {
+            "password": "123",
+            "email": "",
+            "rating": 0,
+            "score": 0
+        },
+        "ui": {
+            "password": "Gi1@gill",
+            "email": "mubashargill@gmail.com",
+            "rating": 0,
+            "score": 0
+        },
+        "12": {
+            "password": "Gi1@gill",
+            "email": "jw@umai.co",
+            "rating": 0,
+            "score": 0
+        },
+        "qw": {
+            "password": "Gi1@gill",
+            "email": "sdf@gfd.co",
+            "rating": 0,
+            "score": 0
+        },
+        "qwe": {
+            "password": "Gi1@gill",
+            "email": "qwe@h.co",
+            "rating": 0,
+            "score": 0
+        }
+    },
+    "freelancers": {
+        "Dr.J": {
+            "password": "Dr.JAWA1",
+            "email": "123@g.c",
+            "rating": 0,
+            "score": 0,
+            "created_at": "2025-12-23 11:06:04.930059"
+        }
+    },
+    "admin": {
+        "APPLE": {
+            "password": "1234qweASDF@",
+            "email": "JAW@JAW.J",
+            "rating": 0,
+            "score": 0,
+            "created_at": "2025-12-23 13:12:14.259411",
+            "rating_count": 0
+        },
+        "admin": {
+            "password": "@Dmin123",
+            "email": "admin@proposal.com",
+            "rating": 0,
+            "score": 0,
+            "created_at": "2025-12-23 13:18:48.392144",
+            "rating_count": 0
+        },
+        "123456": {
+            "password": "12345A@a",
+            "email": "123456@123456.13456",
+            "rating": 0,
+            "score": 0,
+            "created_at": "2025-12-23 13:21:31.388872",
+            "rating_count": 0
+        },
+        "mub": {
+            "password": "mUb@1234",
+            "email": "mubashargill11@mail.com",
+            "rating": 0,
+            "score": 0,
+            "created_at": "2025-12-29 21:40:59.499905",
+            "rating_count": 0
+        },
+        "ADMINISTRATOR": {
+            "password": "DOCtor1!",
+            "email": "admin@doctor.com",
+            "rating": 0,
+            "score": 0,
+            "created_at": "2025-12-29 22:12:16.558772"
+        },
+        "samsung": {
+            "password": "DOCtor1!",
+            "email": "samsung@android.com",
+            "rating": 0,
+            "score": 0,
+            "created_at": "2025-12-30 17:47:57.283311"
+        }
+    },
+    "vendor": {
+        "abc": {
+            "password": "1QAz.123",
+            "email": "bvc@m.c",
+            "rating": 0,
+            "score": 0,
+            "created_at": "2025-12-23 11:35:29.366596",
+            "rating_count": 0
+        },
+        "qq": {
+            "password": "1234qweASDF@",
+            "email": "qq@q.q",
+            "rating": 0,
+            "score": 0,
+            "created_at": "2025-12-23 13:09:43.052311",
+            "rating_count": 0
+        },
+        "123": {
+            "password": "aA@12345",
+            "email": "JAWAD@GMAIL.COM",
+            "rating": 0,
+            "score": 0,
+            "created_at": "2025-12-23 14:40:37.440254",
+            "rating_count": 0
+        },
+        "qwertyuiop": {
+            "password": "123Aa@12",
+            "email": "qwe@gmail.com",
+            "rating": 0,
+            "score": 0,
+            "created_at": "2025-12-23 14:41:55.744704",
+            "rating_count": 0
+        },
+        "DrJawad": {
+            "password": "DOCtor1!",
+            "email": "DOC@doc.com",
+            "rating": 0,
+            "score": 0,
+            "created_at": "2025-12-29 22:05:07.053039"
+        },
+        "Laptop": {
+            "password": "DOCtor1!",
+            "email": "laptop@gmail.com",
+            "rating": 0,
+            "score": 0,
+            "created_at": "2025-12-30 11:19:46.638764"
+        },
+        "Xiaomi": {
+            "password": "DOCtor1!",
+            "email": "xiaomi@pak.com",
+            "rating": 0,
+            "score": 0,
+            "created_at": "2025-12-30 14:25:57.935703"
+        },
+        "mubashargill114": {
+            "password": "GILLmubashar123@",
+            "email": "mubasharaidrees@gmail.com",
+            "rating": 0,
+            "score": 0,
+            "created_at": "2026-01-05 22:46:40.761694"
+        },
+        "iamavendor": {
+            "password": "ApplE12!",
+            "email": "vendor@gmail.com",
+            "rating": 0,
+            "score": 0,
+            "created_at": "2026-01-22 11:11:16.244614"
+        }
+    },
+    "freelancer": {
+        "123": {
+            "password": "1QAz.123",
+            "email": "hgf@gm.c",
+            "rating": 0,
+            "score": 0,
+            "created_at": "2025-12-23 11:34:41.535331",
+            "rating_count": 0
+        },
+        "DoctorJ": {
+            "password": "DOCtor1!",
+            "email": "dotorj@doc.com",
+            "rating": 0,
+            "score": 0,
+            "created_at": "2025-12-29 22:09:41.381998"
+        },
+        "making accounts": {
+            "password": "DOCtor1!",
+            "email": "account@acc.com",
+            "rating": 0,
+            "score": 0,
+            "created_at": "2026-01-22 11:24:32.847008"
+        }
+    }
+}

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ProBid | My Earnings</title>
+<!-- Bootstrap and CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0f172a;--card:#111827;--silver:#e5e7eb;--muted:#9ca3af;--blue:#38bdf8;--green:#34d399;}
+*{font-family:'Poppins',sans-serif;} body{background:var(--bg);color:var(--silver);}
+.navbar{background:#020617;}.navbar-brand{font-weight:700;color:#fff!important;}.nav-link{color:var(--muted)!important;}.nav-link:hover{color:#fff!important;}
+.hero{padding:80px 20px;text-align:center;}
+.hero h1{font-size:2.5rem;font-weight:700;color:#fff;}
+.section{padding:60px 20px;}
+.card{background:var(--card);border:none;border-radius:18px;padding:30px;box-shadow:0 20px 45px rgba(0,0,0,.45);transition:.3s;}
+.card:hover{transform:translateY(-5px);}
+.card h5{color:#fff;font-weight:600;}
+.card p{color:var(--muted;}
+.border-green{border-top:5px solid var(--green);}
+.earnings-display{font-size: 3rem; font-weight: 700; color: var(--green);}
+</style>
+</head>
+<body>
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg">
+<div class="container"><a class="navbar-brand" href="#">ProBid</a><div class="collapse navbar-collapse show"><ul class="navbar-nav ms-auto align-items-center"><li class="nav-item"><a class="nav-link" href="Dashboard.html">Dashboard</a></li><li class="nav-item"><a class="nav-link active" href="proposal.html">Proposals</a></li><li class="nav-item"><a class="nav-link" id="logout-link">Logout</a></li></ul></div></div>
+</nav>
+
+<!-- EARNINGS CONTENT -->
+<section class="hero">
+<h1>My Earnings</h1>
+<div class="earnings-display" id="total-earnings">0 PKR</div>
+<p>Total value from won projects</p>
+</section>
+
+<!-- WON PROJECTS LIST -->
+<section class="section">
+<div class="container">
+    <div class="section-title"><h2>Won Projects</h2></div>
+    <div id="projects-container" class="row g-4">
+        <p class="text-center w-100">Loading your won projects...</p>
+    </div>
+</div>
+</section>
+
+<!-- SCRIPT -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const user = JSON.parse(sessionStorage.getItem('user'));
+    if (!user) { window.location.href = 'login.html'; return; }
+
+    // Fetch earnings data from the API
+    fetch(`http://localhost:5000/api/my-earnings/${user.username}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                alert('Error loading earnings: ' + data.error);
+                return;
+            }
+            // Display total earnings
+            document.getElementById('total-earnings').innerText = `${data.total_earnings.toLocaleString()} PKR`;
+
+            const projectsContainer = document.getElementById('projects-container');
+            projectsContainer.innerHTML = ''; // Clear loading message
+
+            if (data.projects.length === 0) {
+                projectsContainer.innerHTML = '<p class="text-center w-100">You haven\'t won any projects yet.</p>';
+                return;
+            }
+
+            // Create a card for each won project
+            data.projects.forEach(project => {
+                const projectCard = `
+                    <div class="col-md-6">
+                        <div class="card border-green">
+                            <h5>${project.title}</h5>
+                            <p>Winning Bid: <strong>${project.winning_bid.toLocaleString()} PKR</strong></p>
+                        </div>
+                    </div>
+                `;
+                projectsContainer.innerHTML += projectCard;
+            });
+        });
+    
+    // Logout
+    document.getElementById('logout-link').addEventListener('click', function() {
+        sessionStorage.removeItem('user');
+        window.location.href = 'login.html';
+    });
+});
+</script>
+</body>
+</html>

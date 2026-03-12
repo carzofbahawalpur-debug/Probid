@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ProBid | Vendor Portal</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0f172a;--card:#111827;--silver:#e5e7eb;--muted:#9ca3af;--blue:#38bdf8;--purple:#a78bfa;--green:#34d399;--orange:#fb923c;}
+*{font-family:'Poppins',sans-serif;} body{background:var(--bg);color:var(--silver);}
+.navbar-toggler{
+    border:1px solid #fff;
+}
+.navbar-toggler-icon{
+    filter: invert(1);
+}
+.navbar{background:#020617;}.navbar-brand{font-weight:700;color:#fff!important;}.nav-link{color:var(--muted)!important;}.nav-link:hover{color:#fff!important;}
+.hero{padding:80px 20px;text-align:center;}
+.hero h1{font-size:2.5rem;font-weight:700;color:#fff;}
+.section{padding:60px 20px;}
+.card{background:var(--card);border:none;border-radius:18px;padding:30px;box-shadow:0 20px 45px rgba(0,0,0,.45);transition:.3s;}
+.card:hover{transform:translateY(-5px);}
+.card h5{color:#fff;font-weight:600;}
+.card p{color:var(--muted);}
+.border-blue{border-top:5px solid var(--blue);}
+.btn-view{margin-top:auto; border:1px solid var(--blue); color:#fff; border-radius:30px; padding:8px 18px; background:transparent; cursor:pointer;}
+.btn-view:hover{background:var(--blue);color:#000;}
+
+/* MODAL STYLING */
+.modal-content { background-color: var(--card); color: var(--silver); border: 1px solid #374151; border-radius: 18px; }
+.modal-header { border-bottom: 1px solid #374151; }
+.modal-footer { border-top: 1px solid #374151; }
+.btn-close { filter: invert(1); }
+</style>
+</head>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg fixed-top">
+  <div class="container">
+
+    <!-- LOGO -->
+    <a class="navbar-brand" href="#">ProBid</a>
+
+    <!-- TOGGLE BUTTON -->
+    <button class="navbar-toggler text-white" type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#mainNavbar"
+            aria-controls="mainNavbar"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- COLLAPSIBLE MENU -->
+    <div class="collapse navbar-collapse" id="mainNavbar">
+      <ul class="navbar-nav ms-auto align-items-center">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        
+        <li class="nav-item"><a class="nav-link" href="vendors.html">Place Bids</a></li>
+        <li class="nav-item"><a class="nav-link" href="login.html">Logout</a></li>
+        <li class="nav-item">
+          
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+
+<!-- HERO -->
+<section class="hero">
+<h1>Vendor Portal</h1>
+<p>Review active projects and submit your bids</p>
+</section>
+
+<!-- PROJECTS GRID -->
+<section class="section">
+<div class="container">
+    <div id="bids-container" class="row g-4">
+        <!-- Projects will load here from API -->
+        <p class="text-center w-100">Loading projects from server...</p>
+    </div>
+</div>
+</section>
+
+<!-- BIDDING MODAL -->
+<div class="modal fade" id="bidModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" style="color: #fff; font-weight: 700;">Place Your Bid</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="bidProjectId">
+                <div class="mb-3">
+                    <label class="form-label">Project Title</label>
+                    <input type="text" id="bidProjectTitle" class="form-control" readonly style="opacity: 0.7;">
+                </div>
+                <div class="mb-3">
+                    <label for="bidAmount" class="form-label">Your Bid Amount (PKR)</label>
+                    <input type="number" class="form-control" id="bidAmount" placeholder="Enter amount" required>
+                </div>
+                <div class="mb-3">
+                    <label for="deliveryDays" class="form-label">Delivery Time (Days)</label>
+                    <input type="number" class="form-control" id="deliveryDays" placeholder="e.g. 10" required>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="background: transparent; border: 1px solid #374151; color: var(--silver);">Cancel</button>
+                <button type="button" class="btn" onclick="submitBid()" style="background: var(--blue); color: #000; font-weight: 600;">Submit Bid</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SCRIPT -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const user = JSON.parse(sessionStorage.getItem('user'));
+        if (!user) { 
+            window.location.href = 'login.html'; 
+            return; 
+        }
+        
+        // Ensure user is Vendor or Freelancer
+        if(user.role.toLowerCase() === 'admins') {
+            alert("Admins cannot bid. Please use a Vendor account.");
+            window.location.href = 'Dashboard.html';
+            return;
+        }
+
+        // Fetch Projects (Data from JSON/API)
+        fetch('http://localhost:5000/projects')
+            .then(response => response.json())
+            .then(projects => {
+                const container = document.getElementById('bids-container');
+                container.innerHTML = ''; // Clear loading text
+
+                if (!projects || projects.length === 0) {
+                    container.innerHTML = '<p class="text-center w-100">No projects available right now.</p>';
+                    return;
+                }
+
+                projects.forEach(project => {
+                    const cardHtml = `
+                        <div class="col-md-4">
+                            <div class="card border-blue">
+                                <h5>${project.title}</h5>
+                                <p>Budget: ${project.budget} PKR</p>
+                                <p>Min Bid: ${project.min_bid} PKR</p>
+                                <button onclick="openBidModal('${project.title}', ${project.id})" class="btn-view">Place Bid</button>
+                            </div>
+                        </div>
+                    `;
+                    container.innerHTML += cardHtml;
+                });
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('bids-container').innerHTML = '<p class="text-danger text-center">Failed to load projects. Is the API running?</p>';
+            });
+
+        // Logout
+        document.getElementById('logout-link').addEventListener('click', function() {
+            sessionStorage.removeItem('user');
+            window.location.href = 'login.html';
+        });
+    });
+
+    // --- BIDDING LOGIC ---
+    function openBidModal(projectTitle, projectId) {
+        document.getElementById('bidProjectTitle').value = projectTitle;
+        document.getElementById('bidProjectId').value = projectId;
+        document.getElementById('bidAmount').value = '';
+        document.getElementById('deliveryDays').value = '';
+        
+        const myModal = new bootstrap.Modal(document.getElementById('bidModal'));
+        myModal.show();
+    }
+
+    async function submitBid() {
+        const user = JSON.parse(sessionStorage.getItem('user'));
+        const projectId = document.getElementById('bidProjectId').value;
+        const amount = document.getElementById('bidAmount').value;
+        const days = document.getElementById('deliveryDays').value;
+
+        if (!amount || !days) {
+            alert('Please enter both Amount and Delivery Days.');
+            return;
+        }
+
+        try {
+            const response = await fetch('http://localhost:5000/api/bids', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    username: user.username,
+                    project_id: parseInt(projectId),
+                    amount: parseFloat(amount),
+                    delivery_days: parseInt(days)
+                })
+            });
+            const result = await response.json();
+            if (result.success) {
+                alert('Bid placed successfully!');
+                bootstrap.Modal.getInstance(document.getElementById('bidModal')).hide();
+            } else {
+                alert('Error: ' + result.message);
+            }
+        } catch (error) {
+            console.error(error);
+            alert('Failed to place bid. Check backend connection.');
+        }
+    }
+
+</script>
+</body>
+</html>

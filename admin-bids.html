@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ProBid | Admin Manage Bids</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0f172a;--card:#111827;--silver:#e5e7eb;--muted:#9ca3af;--blue:#38bdf8;--green:#34d399;--red:#f87171;}
+*{font-family:'Poppins',sans-serif;} body{background:var(--bg);color:var(--silver);}
+.navbar{background:#020617;}.navbar-brand{font-weight:700;color:#fff!important;}.nav-link{color:var(--muted)!important;}
+.hero{padding:80px 20px;text-align:center;}
+.hero h1{font-size:2.5rem;font-weight:700;color:#fff;}
+.section{padding:60px 20px;}
+.card{background:var(--card);border:none;border-radius:18px;padding:30px;box-shadow:0 20px 45px rgba(0,0,0,.45);}
+.card h5{color:#fff;font-weight:600;}
+.card p{color:var(--muted);}
+.table{color:var(--silver);}
+.badge-closed{background:var(--green); color:#000;}
+.badge-open{background:var(--blue); color:#000;}
+.btn-award{background:var(--blue); color:#000; border:none; padding:5px 15px; border-radius:20px;}
+.btn-award:hover{opacity:0.8;}
+</style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg">
+<div class="container"><a class="navbar-brand" href="#">ProBid Admin</a>
+<ul class="navbar-nav ms-auto"><li class="nav-item"><a class="nav-link" href="Dashboard.html">Dashboard</a></li></ul>
+</div>
+</nav>
+
+<section class="hero">
+<h1>Manage Incoming Bids</h1>
+<p>Review bids and award projects to vendors</p>
+</section>
+
+<section class="section">
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="mb-4" style="color:#fff;">All Bids</h5>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Project Title</th>
+                            <th>Vendor</th>
+                            <th>Amount (PKR)</th>
+                            <th>Delivery (Days)</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bids-table-body">
+                        <tr><td colspan="6" class="text-center">Loading bids...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+<!-- BOOTSTRAP JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const user = JSON.parse(sessionStorage.getItem('user'));
+        
+        // 1. Security Check: Ensure user is Admin
+        if (!user || user.role !== 'admins') {
+            alert('Access Denied. Admins only.');
+            window.location.href = 'Dashboard.html';
+            return;
+        }
+
+        const tbody = document.getElementById('bids-table-body');
+        tbody.innerHTML = '<tr><td colspan="6" class="text-center">Loading bids...</td></tr>';
+
+        // 2. Fetch All Bids
+        fetch('http://localhost:5000/api/all-bids')
+            .then(response => response.json())
+            .then(data => {
+                tbody.innerHTML = ''; // Clear loading text
+
+                // 3. Handle API Errors
+                if (data.error) {
+                    tbody.innerHTML = `<tr><td colspan="6" class="text-center text-danger">Error: ${data.error}</td></tr>`;
+                    console.error("Server Error:", data.error);
+                    return;
+                }
+
+                // 4. Check if data is valid (it must be an array)
+                if (!Array.isArray(data)) {
+                    console.error("Received data is not a list:", data);
+                    tbody.innerHTML = `<tr><td colspan="6" class="text-center text-danger">Server sent invalid data format.</td></tr>`;
+                    return;
+                }
+
+                // 5. Display Bids
+                if (data.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="6" class="text-center text-muted">No bids found in the system.</td></tr>';
+                    return;
+                }
+
+                data.forEach(bid => {
+                    // Determine badge color
+                    const statusClass = bid.project_status === 'CLOSED' ? 'badge-closed' : 'badge-open';
+                    const statusText = bid.project_status === 'CLOSED' ? 'CLOSED' : 'OPEN';
+                    
+                    // Disable button if already closed
+                    const btnState = bid.project_status === 'CLOSED' ? 'disabled' : '';
+                    const btnText = bid.project_status === 'CLOSED' ? 'Awarded' : 'Accept Deal';
+
+                    const row = `
+                        <tr>
+                            <td>${bid.project_title || 'Unknown Project'}</td>
+                            <td>${bid.vendor}</td>
+                            <td>${bid.amount.toLocaleString()}</td>
+                            <td>${bid.delivery_days}</td>
+                            <td><span class="badge ${statusClass}">${statusText}</span></td>
+                            <td>
+                                <button onclick="awardBid(${bid.id})" class="btn-award" ${btnState}>
+                                    ${btnText}
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+                    tbody.innerHTML += row;
+                });
+            })
+            .catch(error => {
+                console.error('Fetch Error:', error);
+                tbody.innerHTML = '<tr><td colspan="6" class="text-center text-danger">Failed to load bids. Check console (F12) or Python server.</td></tr>';
+            });
+    });
+
+    // Function to Award Bid
+    async function awardBid(bidId) {
+        if(!confirm('Are you sure you want to accept this bid? This will close the project.')) return;
+
+        try {
+            const res = await fetch('http://localhost:5000/api/award-bid', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ bid_id: bidId })
+            });
+            const data = await res.json();
+            if(data.success) {
+                alert('Deal Accepted! Project Closed.');
+                location.reload(); 
+            } else {
+                alert('Error: ' + data.message);
+            }
+        } catch(e) {
+            alert('Server error: ' + e.message);
+        }
+    }
+</script>
+
+</body>
+</html>

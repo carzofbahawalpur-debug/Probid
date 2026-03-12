@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ProBid | Register</title>
+<!-- Bootstrap and CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0f172a;--card:#111827;--silver:#e5e7eb;--muted:#9ca3af;--blue:#38bdf8;--purple:#a78bfa;}
+*{font-family:'Poppins',sans-serif;}
+body{background:linear-gradient(135deg,#020617,#1e293b);color:var(--silver);min-height:100vh;display:flex;align-items:center;justify-content:center;}
+.register-card{background:var(--card);border-radius:20px;padding:40px;width:100%;max-width:450px;box-shadow:0 30px 70px rgba(0,0,0,.6);border-top:6px solid var(--purple);}
+.register-card h2{color:#fff;font-weight:700;text-align:center;margin-bottom:10px;}
+.register-card p{text-align:center;color:var(--muted);margin-bottom:30px;}
+.form-control{background:#020617;border:1px solid #1f2937;color:#fff;padding:12px;border-radius:12px;}
+.form-control:focus{background:#020617;border-color:var(--purple);box-shadow:none;color:#fff;}
+.btn-register{background:linear-gradient(135deg,var(--purple),var(--blue));border:none;padding:12px;border-radius:30px;font-weight:600;color:#000;width:100%;margin-top:15px;}
+.btn-register:hover{opacity:.9;}
+.link{color:var(--blue);text-decoration:none;font-size:14px;}
+.link:hover{color:#fff;}
+.footer-text{text-align:center;margin-top:20px;font-size:14px;color:var(--muted);}
+</style>
+</head>
+<body>
+
+<div class="register-card">
+    <h2>Create Account</h2>
+    <p>Join ProBid to manage proposals and bids</p>
+    <div id="error-message" class="alert alert-danger" style="display:none;"></div>
+    <form id="registerForm">
+        <div class="mb-3">
+            <input type="text" class="form-control" id="username" placeholder="Username" required>
+        </div>
+        <div class="mb-3">
+            <input type="email" class="form-control" id="email" placeholder="Email Address" required>
+        </div>
+        <div class="mb-3">
+            <select class="form-control" id="role" required>
+                <option value="">Select Role</option>
+                <option value="admins">Admins</option>
+                <option value="vendor">Vendor</option>
+                <option value="freelancer">Freelancer</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <input type="password" class="form-control" id="password" placeholder="Password" required>
+        </div>
+        <div class="mb-3">
+            <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password" required>
+        </div>
+        <button type="submit" class="btn-register">Register Account</button>
+    </form>
+    <div class="footer-text">Already have an account? <a href="login.html" class="link">Login</a></div>
+</div>
+
+<!-- THE SMART JAVASCRIPT BRAIN -->
+<script>
+document.getElementById('registerForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const username = document.getElementById('username').value;
+    const email = document.getElementById('email').value;
+    const role = document.getElementById('role').value;
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+    const errorDiv = document.getElementById('error-message');
+
+    // --- Client-Side Validation ---
+    if (password !== confirmPassword) {
+        showError('Passwords do not match.');
+        return;
+    }
+    if (password.length < 8 || !/[A-Z]/.test(password) || !/[a-z]/.test(password) || !/[0-9]/.test(password) || !/[^a-zA-Z0-9]/.test(password)) {
+        showError('Password does not meet requirements (8+ chars, upper, lower, number, symbol).');
+        return;
+    }
+
+    try {
+        const response = await fetch('http://localhost:5000/api/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, email, role, password })
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            alert('Registration successful! You can now log in.');
+            window.location.href = 'login.html';
+        } else {
+            showError(result.message);
+        }
+    } catch (error) {
+        showError('Registration failed. Is the Python API running?');
+    }
+});
+
+function showError(message) {
+    const errorDiv = document.getElementById('error-message');
+    errorDiv.textContent = message;
+    errorDiv.style.display = 'block';
+}
+</script>
+
+</body>
+</html>

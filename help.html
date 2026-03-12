@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ProBid | Help Center</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0f172a;--card:#111827;--silver:#e5e7eb;--muted:#9ca3af;--green:#34d399;}
+*{font-family:'Poppins',sans-serif;}
+body{background:var(--bg);color:var(--silver);}
+.navbar{background:#020617;}.navbar-brand{font-weight:700;color:#fff!important;}
+.hero{padding:60px 20px;text-align:center;}
+.hero h1{color:#fff;font-weight:700;}
+.section{padding:60px 20px;}
+.card{background:var(--card);border:none;border-radius:18px;padding:30px;box-shadow:0 20px 45px rgba(0,0,0,.45);border-top:5px solid var(--green);}
+.accordion-button{background:#1f2937;color:#fff;border:none;}
+.accordion-body{background:#111827;color:var(--silver);}
+footer{background:#020617;padding:60px 20px;border-top:1px solid #1f2937;}
+footer a{color:var(--muted);text-decoration:none;display:block;margin-bottom:8px;font-size:14px;}
+footer a:hover{color:#fff;}
+</style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg">
+<div class="container"><a class="navbar-brand" href="index.html">ProBid</a></div>
+</nav>
+
+<section class="hero">
+<h1>How can we help?</h1>
+<p>Frequently Asked Questions</p>
+</section>
+
+<section class="section">
+<div class="container" style="max-width:800px;">
+    <div class="accordion" id="accordionFAQ">
+        
+        <!-- Item 1 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                    How do I place a bid?
+                </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionFAQ">
+                <div class="accordion-body">
+                    First, ensure you are logged in as a Vendor or Freelancer. Navigate to the "Vendors" section in the menu. You will see a list of available projects. Click on the "Place Bid" button on the project card, enter your offer amount and estimated delivery time, and click "Submit".
+                </div>
+            </div>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                    How do I get paid for a completed project?
+                </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFAQ">
+                <div class="accordion-body">
+                    Payments are managed offline between the Vendor/Freelancer and the Admin. However, ProBid records the "Winning Bid" amount in the system once the Admin clicks "Accept Deal". You can view your total recorded earnings in the "Earnings" section of your dashboard.
+                </div>
+            </div>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                    I forgot my password. What should I do?
+                </button>
+            </h2>
+            <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFAQ">
+                <div class="accordion-body">
+                    Unfortunately, since this is an academic demonstration project, we do not have an automated email recovery system. Please contact the system administrator directly to reset your password, or simply register a new account to continue using the platform.
+                </div>
+            </div>
+        </div>
+
+        <!-- Item 4 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour">
+                    Can I edit my bid after submitting it?
+                </button>
+            </h2>
+            <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionFAQ">
+                <div class="accordion-body">
+                    No, once a bid is submitted, it is recorded in the database and cannot be edited. Please double-check your amounts and delivery days carefully before clicking the "Submit" button. If you made a serious mistake, please contact the admin to revoke your bid.
+                </div>
+            </div>
+        </div>
+
+        <!-- Item 5 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive">
+                    What does "Market Fit Score" mean?
+                </button>
+            </h2>
+            <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionFAQ">
+                <div class="accordion-body">
+                    This is an AI-driven feature available in the Freelancer Profile. It analyzes your skills, certifications, and current market demand to predict your success rate in different fields (e.g., IT vs Construction). It is purely a tool to help you focus your learning efforts.
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</section>
+
+<footer>
+<div class="container">
+<div class="row">
+    <div class="col-md-3"><h5>Platform</h5><a href="proposal.html">Proposals</a><a href="vendors.html">Bidding</a></div>
+    <div class="col-md-3"><h5>Company</h5><a href="index.html">About</a><a href="careers.html">Careers</a></div>
+    <div class="col-md-3"><h5>Support</h5><a href="help.html">Help</a><a href="contact.html">Contact</a></div>
+    <div class="col-md-3"><h5>Legal</h5><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
+</div>
+<div class="text-center mt-4" style="color:#6b7280; font-size:12px;">© 2025 ProBid</div>
+</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

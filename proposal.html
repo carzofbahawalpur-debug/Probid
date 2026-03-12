@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ProBid | Proposals</title>
+
+<!-- Bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+    --bg:#0f172a;
+    --card:#111827;
+    --silver:#e5e7eb;
+    --muted:#9ca3af;
+
+    --blue:#38bdf8;
+    --purple:#a78bfa;
+    --green:#34d399;
+    --orange:#fb923c;
+}
+
+*{font-family:'Poppins',sans-serif;}
+body{background:var(--bg);color:var(--silver);}
+
+/* NAVBAR */
+.navbar-toggler{
+    border:1px solid #fff;
+}
+.navbar-toggler-icon{
+    filter: invert(1);
+}
+
+.navbar{background:#020617;}
+.navbar-brand{font-weight:700;color:#fff!important;}
+.nav-link{color:var(--muted)!important;}
+.nav-link:hover{color:#fff!important;}
+.login-btn{
+    border:1px solid var(--blue);
+    padding:6px 18px;
+    border-radius:30px;
+    color:#fff;
+    text-decoration:none;
+}
+.login-btn:hover{background:var(--blue);color:#000;}
+
+/* PAGE HEADER */
+.page-header{
+    padding:120px 20px 60px;
+    text-align:center;
+    background:linear-gradient(135deg,#020617,#1e293b);
+}
+.page-header h1{color:#fff;font-weight:700;}
+.page-header p{color:var(--muted);}
+
+/* SECTION */
+.section{padding:80px 20px;}
+
+/* EQUAL HEIGHT CARDS */
+.row > div{display:flex;}
+.card{
+    background:var(--card);
+    border:none;
+    border-radius:18px;
+    padding:30px;
+    width:100%;
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    box-shadow:0 20px 45px rgba(0,0,0,.45);
+    transition:.3s;
+}
+.card:hover{transform:translateY(-8px);}
+
+/* COLOR BARS */
+.border-blue{border-top:5px solid var(--blue);}
+.border-purple{border-top:5px solid var(--purple);}
+.border-green{border-top:5px solid var(--green);}
+.border-orange{border-top:5px solid var(--orange);}
+
+
+.card h5{color:#fff;font-weight:600;}
+.card p{color:var(--muted);}
+
+/* BADGE */
+.badge-custom{
+    background:#1f2937;
+    border:1px solid #374151;
+    color:#dddfe4;
+    width:fit-content;
+}
+
+/* BUTTON */
+.btn-view{
+    margin-top:auto;
+    border:1px solid var(--blue);
+    color:#000;
+    border-radius:30px;
+    padding:8px 18px;
+    text-decoration:none;
+    text-align:center;
+
+}
+.btn-view:hover{background:var(--blue);color:#000;}
+
+/* FOOTER */
+footer{background:#020617;padding:60px 20px;}
+footer h5{color:#fff;}
+footer a{color:var(--muted);text-decoration:none;display:block;margin-bottom:8px;}
+footer a:hover{color:#fff;}
+.footer-bottom{text-align:center;color:#6b7280;font-size:14px;margin-top:30px;}
+</style>
+</head>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<body>
+
+
+
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg fixed-top">
+  <div class="container">
+
+    <!-- LOGO -->
+    <a class="navbar-brand" href="#">ProBid</a>
+
+    <!-- TOGGLE BUTTON -->
+    <button class="navbar-toggler text-white" type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#mainNavbar"
+            aria-controls="mainNavbar"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- COLLAPSIBLE MENU -->
+    <div class="collapse navbar-collapse" id="mainNavbar">
+      <ul class="navbar-nav ms-auto align-items-center">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="proposal.html">Proposals</a></li>
+        <li class="nav-item"><a class="nav-link" href="vendors.html">Vendors</a></li>
+        <li class="nav-item"><a class="nav-link" href="pricing.html">Pricing</a></li>
+        <li class="nav-item">
+          <a class="login-btn ms-3" href="login.html">Login</a>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+
+<!-- HEADER -->
+<section class="page-header">
+<h1>Available Proposals</h1>
+<p>Browse all active opportunities</p>
+</section>
+
+<!-- PROPOSALS -->
+<section class="section">
+<div class="container">
+<div class="row g-4">
+
+
+
+</div>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+<div class="container">
+<div class="row">
+    <div class="col-md-3"><h5></h5><a href="proposal.html" style="margin-right: 20px;">Proposals</a><a href="vendors.html">Bidding</a></div>
+    <div class="col-md-3"><h5></h5><a href="contact.html" style="margin-right: 20px;">About</a><a href="careers.html">Careers</a></div>
+    <div class="col-md-3"><h5></h5><a href="help.html" style="margin-right: 20px;">Help</a><a href="contact.html">Contact</a></div>
+    <div class="col-md-3"><h5></h5><a href="privacy.html" style="margin-right: 20px;">Privacy</a><a href="terms.html">Terms</a></div>
+</div>
+<div class="text-center mt-4" style="color:#6b7280; font-size:12px;">© 2025 ProBid</div>
+</div>
+</footer>
+</body>
+</html>
+
+
+
+<!-- The JavaScript that connects to Python API -->
+<!-- THE BRAIN OF THE PAGE -->
+<!-- THE COMPLETE BRAIN OF THE PAGE -->
+<script>
+    // A global variable to store all projects
+    let allProjects = [];
+    // A global variable to store the ID of the project we are bidding on
+    let currentProjectId;
+
+    // --- FUNCTION 1: Show Project Details Modal ---
+    function showProjectDetails(projectId) {
+        const project = allProjects.find(p => p.id == projectId);
+        if (!project) {
+            alert("Project details not found!");
+            return;
+        }
+        const deadlineDate = new Date(project.deadline);
+        const today = new Date();
+        const timeDiff = deadlineDate - today;
+        const daysDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+        let deadlineText = '';
+        if (daysDiff < 0) {
+            deadlineText = `Expired ${Math.abs(daysDiff)} days ago.`;
+        } else {
+            deadlineText = `${daysDiff} days remaining.`;
+        }
+        document.getElementById('detail-title').innerText = project.title;
+        document.getElementById('detail-description').innerText = project.desc;
+        document.getElementById('detail-budget').innerText = project.budget.toLocaleString();
+        document.getElementById('detail-min-bid').innerText = project.min_bid.toLocaleString();
+        document.getElementById('detail-status').innerText = project.status;
+        document.getElementById('detail-deadline-days').innerText = deadlineText;
+        const myModal = new bootstrap.Modal(document.getElementById('projectDetailsModal'));
+        myModal.show();
+    }
+
+    // --- FUNCTION 2: Open the Bid Modal ---
+    function openBidModal(projectId, projectTitle, minBid) {
+        const user = JSON.parse(sessionStorage.getItem('user'));
+        if (!user) {
+            alert('You must be logged in to place a bid!');
+            window.location.href = 'login.html';
+            return;
+        }
+        document.getElementById('projectTitle').innerText = projectTitle;
+        document.getElementById('minBid').innerText = minBid;
+        document.getElementById('bidAmount').min = minBid;
+        window.currentProjectId = projectId;
+        const myModal = new bootstrap.Modal(document.getElementById('bidModal'));
+        myModal.show();
+    }
+
+    // --- FUNCTION 3: Submit the Bid ---
+    async function submitBid() {
+        const user = JSON.parse(sessionStorage.getItem('user'));
+        const amount = document.getElementById('bidAmount').value;
+        const deliveryDays = document.getElementById('deliveryDays').value;
+        const response = await fetch('http://localhost:5000/api/bid', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                projectId: window.currentProjectId,
+                username: user.username,
+                amount: parseFloat(amount),
+                deliveryDays: parseInt(deliveryDays)
+            })
+        });
+        const result = await response.json();
+        if (result.success) {
+            alert('Bid submitted successfully!');
+            bootstrap.Modal.getInstance(document.getElementById('bidModal')).hide();
+        } else {
+            alert('Error: ' + result.message);
+        }
+    }
+
+    // --- MAIN FUNCTION: Runs when the page loads ---
+    document.addEventListener('DOMContentLoaded', function() {
+        const apiUrl = 'http://localhost:5000/projects';
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(projects => {
+                allProjects = projects; // Store projects globally
+                const projectContainer = document.querySelector('.row.g-4');
+                projectContainer.innerHTML = '';
+                projects.forEach(project => {
+                    const cardHtml = `
+                        <div class="col-md-4">
+                            <div class="card border-blue">
+                                <span class="badge badge-custom mb-2">${project.status}</span>
+                                <h5>${project.title}</h5>
+                                <p>${project.desc}</p>
+                                <p>Budget: ${project.budget} PKR</p>
+                                <p>Min Bid: ${project.min_bid} PKR</p>
+                                <button onclick="showProjectDetails(${project.id})" class="btn-view">View Details</button>
+                                <button onclick="openBidModal(${project.id}, '${project.title}', ${project.min_bid})" class="btn-view" style="margin-left: 5px;">Place Bid</button>
+                            </div>
+                        </div>
+                    `;
+                    projectContainer.innerHTML += cardHtml;
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching projects:', error);
+                const projectContainer = document.querySelector('.row.g-4');
+                projectContainer.innerHTML = '<p class="text-danger">Could not load projects. Is the Python API running?</p>';
+            });
+    });
+</script>
+<!-- Project Details Modal -->
+<div class="modal fade" id="projectDetailsModal" tabindex="-1" aria-labelledby="projectDetailsModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" style="background: var(--card); color: var(--silver);">
+      <div class="modal-header">
+        <h5 class="modal-title" id="projectDetailsModalLabel">Project Details</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h4 id="detail-title"></h4>
+        <p id="detail-description"></p>
+        <hr style="border-color: var(--muted);">
+        <div class="row">
+            <div class="col-md-6">
+                <p><strong>Budget:</strong> <span id="detail-budget"></span> PKR</p>
+                <p><strong>Minimum Bid:</strong> <span id="detail-min-bid"></span> PKR</p>
+            </div>
+            <div class="col-md-6">
+                <p><strong>Status:</strong> <span id="detail-status"></span></p>
+                <p><strong>Deadline:</strong> <span id="detail-deadline-days"></span></p>
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+

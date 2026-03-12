@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ProBid | Proposal & Bidding Platform</title>
+
+<!-- Bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+    --bg:#0f172a;
+    --card:#111827;
+    --silver:#e5e7eb;
+    --muted:#9ca3af;
+
+    --blue:#38bdf8;
+    --purple:#a78bfa;
+    --green:#34d399;
+    --orange:#fb923c;
+}
+
+*{font-family:'Poppins',sans-serif;}
+body{background:var(--bg);color:var(--silver);}
+
+/* NAVBAR */
+.navbar-toggler{
+    border:1px solid #fff;
+}
+.navbar-toggler-icon{
+    filter: invert(1);
+}
+
+.navbar{background:#020617;}
+.navbar-brand{font-weight:700;color:#fff!important;}
+.nav-link{color:var(--muted)!important;}
+.nav-link:hover{color:#fff!important;}
+.login-btn{
+    border:1px solid var(--blue);
+    padding:6px 18px;
+    border-radius:30px;
+    color:#fff;
+    text-decoration:none;
+}
+.login-btn:hover{background:var(--blue);color:#000;}
+
+/* HERO */
+.hero{
+    background:linear-gradient(135deg,#020617,#1e293b);
+    padding:120px 20px;
+    text-align:center;
+}
+.hero h1{font-size:3rem;font-weight:700;color:#fff;}
+.hero p{color:var(--muted);}
+
+/* SECTIONS */
+.section{padding:80px 20px;}
+.section-title{text-align:center;margin-bottom:60px;}
+.section-title h2{color:#fff;font-weight:700;}
+.section-title p{color:var(--muted);}
+
+/* EQUAL HEIGHT CARDS */
+.row > div{display:flex;}
+.card{
+    background:var(--card);
+    border:none;
+    border-radius:18px;
+    padding:30px;
+    width:100%;
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    box-shadow:0 20px 45px rgba(0,0,0,.45);
+    transition:.3s;
+}
+.card:hover{transform:translateY(-8px);}
+
+/* COLOR BARS */
+.border-blue{border-top:5px solid var(--blue);}
+.border-purple{border-top:5px solid var(--purple);}
+.border-green{border-top:5px solid var(--green);}
+.border-orange{border-top:5px solid var(--orange);}
+
+.card h5{color:#fff;font-weight:600;}
+.card p{color:var(--muted);}
+
+/* BADGE */
+.badge-custom{
+    background:#1f2937;
+    border:1px solid #374151;
+    color:#e5e7eb;
+}
+
+/* PRICING */
+.price{font-size:42px;font-weight:700;color:#fff;}
+
+/* FOOTER */
+footer{background:#020617;padding:60px 20px;border-top:1px solid #1f2937;}
+footer a{color:var(--muted);text-decoration:none;display:block;margin-bottom:8px;font-size:14px;}
+footer a:hover{color:#fff;}
+</style>
+</head>
+
+<body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg fixed-top">
+  <div class="container">
+
+    <!-- LOGO -->
+    <a class="navbar-brand" href="#">ProBid</a>
+
+    <!-- TOGGLE BUTTON -->
+    <button class="navbar-toggler text-white" type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#mainNavbar"
+            aria-controls="mainNavbar"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- COLLAPSIBLE MENU -->
+    <div class="collapse navbar-collapse" id="mainNavbar">
+      <ul class="navbar-nav ms-auto align-items-center">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="proposal.html">Proposals</a></li>
+        <li class="nav-item"><a class="nav-link" href="vendors.html">Vendors</a></li>
+        <li class="nav-item"><a class="nav-link" href="pricing.html">Pricing</a></li>
+        <li class="nav-item">
+          <a class="login-btn ms-3" href="login.html">Login</a>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+
+<!-- HERO -->
+<section class="hero">
+<h1>Luxury Proposal & Bidding Platform</h1>
+<p>Transparent • Secure • Professional Procurement</p>
+
+
+<a href="proposal.html" class="btn btn-outline-light mt-4">Explore Proposals</a>
+</section>
+
+<!-- FEATURES -->
+<section class="section">
+<div class="container">
+<div class="section-title">
+<h2>Platform Highlights</h2>
+<p>Built for organizations & vendors</p>
+</div>
+<div class="row g-4">
+<div class="col-md-4">
+<div class="card border-blue">
+<h5>Proposal Management</h5>
+<p>Create and manage professional proposals with transparency.</p>
+</div>
+</div>
+<div class="col-md-4">
+<div class="card border-purple">
+<h5>Vendor Bidding</h5>
+<p>Secure and competitive bidding environment.</p>
+</div>
+</div>
+<div class="col-md-4">
+<div class="card border-green">
+<h5>Audit & Compliance</h5>
+<p>Complete bid history with accountability.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- PROPOSALS -->
+<section class="section">
+<div class="container">
+<div class="section-title">
+<h2>Active Proposals</h2>
+<p>Open opportunities</p>
+</div>
+<div class="row g-4">
+<div class="col-md-4">
+<div class="card border-orange">
+<span class="badge badge-custom mb-2">IT</span>
+<h5>University ERP System</h5>
+<p>Design & deployment of ERP solution.</p>
+</div>
+</div>
+<div class="col-md-4">
+<div class="card border-blue">
+<span class="badge badge-custom mb-2">Construction</span>
+<h5>Campus Expansion</h5>
+<p>Infrastructure development proposal.</p>
+</div>
+</div>
+<div class="col-md-4">
+<div class="card border-green">
+<span class="badge badge-custom mb-2">Energy</span>
+<h5>Solar Installation</h5>
+<p>Renewable energy solution.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- PRICING -->
+<section class="section">
+<div class="container">
+<div class="section-title">
+<h2>Pricing Plans</h2>
+<p>Simple & transparent</p>
+</div>
+<div class="row g-4">
+<div class="col-md-4">
+<div class="card border-blue text-center">
+<h5>Basic</h5>
+<div class="price">$0</div>
+<p>View proposals & bids</p>
+</div>
+</div>
+<div class="col-md-4">
+<div class="card border-purple text-center">
+<h5>Professional</h5>
+<div class="price">$49</div>
+<p>Create & submit bids</p>
+</div>
+</div>
+<div class="col-md-4">
+<div class="card border-orange text-center">
+<h5>Enterprise</h5>
+<div class="price">$99</div>
+<p>Unlimited access</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+<div class="container">
+<div class="row">
+    <div class="col-md-3"><h5></h5><a href="proposal.html" style="margin-right: 20px;">Proposals</a><a href="vendors.html">Bidding</a></div>
+    <div class="col-md-3"><h5></h5><a href="contact.html" style="margin-right: 20px;">About</a><a href="careers.html">Careers</a></div>
+    <div class="col-md-3"><h5></h5><a href="help.html" style="margin-right: 20px;">Help</a><a href="contact.html">Contact</a></div>
+    <div class="col-md-3"><h5></h5><a href="privacy.html" style="margin-right: 20px;">Privacy</a><a href="terms.html">Terms</a></div>
+</div>
+<div class="text-center mt-4" style="color:#6b7280; font-size:12px;">© 2025 ProBid</div>
+</div>
+</footer>
+</body>
+</html>
