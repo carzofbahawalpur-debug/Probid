@@ -80,7 +80,7 @@
         tbody.innerHTML = '<tr><td colspan="6" class="text-center">Loading bids...</td></tr>';
 
         // 2. Fetch All Bids
-        fetch('http://localhost:5000/api/all-bids')
+        fetch('https://probid-bid-platform.onrender.com/api/all-bids')
             .then(response => response.json())
             .then(data => {
                 tbody.innerHTML = ''; // Clear loading text
@@ -142,7 +142,7 @@
         if(!confirm('Are you sure you want to accept this bid? This will close the project.')) return;
 
         try {
-            const res = await fetch('http://localhost:5000/api/award-bid', {
+            const res = await fetch('https://probid-bid-platform.onrender.com/api/award-bid', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({ bid_id: bidId })
