@@ -6,6 +6,9 @@ import string
 from datetime import datetime, timedelta # <-- ADD timedelta
 app = Flask(__name__)
 CORS(app)
+@app.route('/')
+def home():
+    return "ProBid API is running successfully!"
 
 # --- Helper Functions from your original script ---
 def find_user(username):
