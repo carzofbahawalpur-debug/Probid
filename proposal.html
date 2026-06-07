@@ -244,31 +244,39 @@ footer a:hover{color:#fff;}
 
     // --- FUNCTION 3: Submit the Bid ---
     async function submitBid() {
-        const user = JSON.parse(sessionStorage.getItem('user'));
-        const amount = document.getElementById('bidAmount').value;
-        const deliveryDays = document.getElementById('deliveryDays').value;
-        const response = await fetch('http://localhost:5000/api/bid', {
+    const user = JSON.parse(sessionStorage.getItem('user'));
+    const amount = document.getElementById('bidAmount').value;
+    const deliveryDays = document.getElementById('deliveryDays').value;
+
+    const response = await fetch(
+        'https://probid-bid-platform.onrender.com/api/bids',
+        {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify({
-                projectId: window.currentProjectId,
                 username: user.username,
+                project_id: window.currentProjectId,
                 amount: parseFloat(amount),
-                deliveryDays: parseInt(deliveryDays)
+                delivery_days: parseInt(deliveryDays)
             })
-        });
-        const result = await response.json();
-        if (result.success) {
-            alert('Bid submitted successfully!');
-            bootstrap.Modal.getInstance(document.getElementById('bidModal')).hide();
-        } else {
-            alert('Error: ' + result.message);
         }
+    );
+
+    const result = await response.json();
+
+    if (result.success) {
+        alert('Bid submitted successfully!');
+    } else {
+        alert(result.message);
+    }
+}
     }
 
     // --- MAIN FUNCTION: Runs when the page loads ---
     document.addEventListener('DOMContentLoaded', function() {
-        const apiUrl = 'http://localhost:5000/projects';
+        const apiUrl = 'https://probid-bid-platform.onrender.com/projects';
         fetch(apiUrl)
             .then(response => response.json())
             .then(projects => {
