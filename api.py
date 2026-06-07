@@ -9,6 +9,14 @@ CORS(app)
 @app.route('/')
 def home():
     return "ProBid API is running successfully!"
+@app.route("/api/test")
+def test():
+    return jsonify({
+        "message": "Backend Connected Successfully"
+    })
+
+if __name__ == "__main__":
+    app.run()    
 
 # --- Helper Functions from your original script ---
 def find_user(username):
