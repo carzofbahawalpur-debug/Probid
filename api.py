@@ -15,8 +15,7 @@ def test():
         "message": "Backend Connected Successfully"
     })
 
-if __name__ == "__main__":
-    app.run()    
+  
 
 # --- Helper Functions from your original script ---
 def find_user(username):
